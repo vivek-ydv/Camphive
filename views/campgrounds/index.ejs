@@ -1,27 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('/layouts/boilerplatewithoutFooter') %>
+<style>
+    .card {
+        border: 1px solid #fefefe;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        display: flex;
+    }
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campgrounds</title>
-</head>
+    .card-img-top {
+        height: 200px; /* Set a fixed height for the images */
+        object-fit: cover;
+        border-radius: 4px 0 0 4px;
+    }
 
-<body>
-    <h1>All Campgrounds</h1>
-    <div>
-        <a href="/campgrounds/new">Add a Campgound</a>
-    </div>
-    <ul>
-        <% for (let campground of campgrounds){ %>
-            <li>
-                <a href="/campgrounds/<%= campground._id  %>">
-                    <%=campground.title %>
-                </a>
-            </li>
-            <%} %>
-    </ul>
-</body>
+    .card-details {
+        flex: 1;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+    }
 
-</html>
+    .card-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .card-subtitle {
+        font-size: 18px;
+        color: #888;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        flex: 1;
+        margin-bottom: 10px;
+    }
+
+    .card-actions {
+        margin-top: auto;
+    }
+</style>
+<div class="row mt-5">
+    <% for (let campground of campgrounds){ %>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="<%= campground.image %>" class="card-img-top" alt="Campground Image">
+            </div>
+        </div>
+        <div class="col-md-8 mb-4">
+            <div class="card">
+                <div class="card-details">
+                    <h1 class="card-title"><%= campground.title %></h1>
+                    <h2 class="card-subtitle mb-2 text-muted"><%= campground.location %></h2>
+                    <p class="card-text"><%= campground.description %></p>
+                    <div class="card-actions">
+                        <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">View <%= campground.title %></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</div>
