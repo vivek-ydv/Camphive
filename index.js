@@ -2,11 +2,12 @@ const express = require('express');
 const path = require('path');
 const ejsMate = require('ejs-mate');
 const connectToMongo = require('./db');
-const { campgroundSchema } = require('./joiSchemas');
+const { campgroundSchema, reviewSchema } = require('./joiSchemas');
 const ExpressError = require('./utils/ExpressError');
 const catchAsync = require('./utils/catchAsync');
 const methodOverride = require('method-override');
 const Campground = require('./models/campground');
+const Review = require('./models/review');
 
 connectToMongo();
 const app = express();
@@ -18,7 +19,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true })); // to parse the req.body
 app.use(methodOverride('_method'));
 
-//-----------------Joi Validation
+//-----------------Joi Validation---Middlewares-------------------
 const validateCampground = (req, res, next) => {
     const { error } = campgroundSchema.validate(req.body)
     if (error) {
@@ -26,7 +27,18 @@ const validateCampground = (req, res, next) => {
         const msg = error.details.map(el => el.message).join(', ')
         throw new ExpressError(msg, 400)
     } else {
-        next()
+        next();
+    }
+}
+
+const validateReview = (req, res, next) => {
+    const { error } = reviewSchema.validate(req.body)
+    if (error) {
+        // Since details is array of object
+        const msg = error.details.map(el => el.message).join(', ')
+        throw new ExpressError(msg, 400)
+    } else {
+        next();
     }
 }
 
@@ -79,6 +91,16 @@ app.delete('/campgrounds/:id', catchAsync(async (req, res, next) => {
     const { id } = req.params;
     await Campground.findByIdAndDelete(id);
     res.redirect('/campgrounds');
+}))
+
+//-------------------Adding reviews
+app.post('/campgrounds/:id/reviews', validateReview, catchAsync(async (req, res, next) => {
+    const campground = await Campground.findById(req.params.id);
+    const review = new Review(req.body.review);
+    campground.reviews.push(review);
+    await review.save();
+    await campground.save();
+    res.redirect(`/campgrounds/${campground._id}`)
 }))
 
 //-------------------Handelling errors
