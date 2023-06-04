@@ -70,7 +70,7 @@ app.post('/campgrounds', validateCampground, catchAsync(async (req, res, next) =
 
 //-------------------Get info about a single campground
 app.get('/campgrounds/:id', catchAsync(async (req, res, next) => {
-    const campground = await Campground.findById(req.params.id);
+    const campground = await Campground.findById(req.params.id).populate('reviews');
     res.render('campgrounds/show', { campground });
 }))
 
@@ -103,6 +103,14 @@ app.post('/campgrounds/:id/reviews', validateReview, catchAsync(async (req, res,
     res.redirect(`/campgrounds/${campground._id}`)
 }))
 
+//-------------------Deleting reviews
+app.delete('/campgrounds/:id/reviews/:reviewId', catchAsync(async (req, res, next) => {
+    const { id, reviewId } = req.params;
+    await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/campgrounds/${id}`)
+}))
+
 //-------------------Handelling errors
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404));
@@ -115,4 +123,4 @@ app.use((err, req, res, next) => {
 
 app.listen(3000, () => {
     console.log('On port 3000');
-})
+}) 
