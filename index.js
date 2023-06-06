@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const ejsMate = require('ejs-mate');
 const connectToMongo = require('./db');
+const session = require('express-session');
+const flash = require('connect-flash');
 const ExpressError = require('./utils/ExpressError');
 const catchAsync = require('./utils/catchAsync');
 const methodOverride = require('method-override');
@@ -25,8 +27,29 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-// ------------------ Configuring static files
+// Configuring static files
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Configuring session
+const sessionConfig = {
+    secret: "$ecret",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+}
+app.use(session(sessionConfig));
+
+// Configuring flash
+app.use(flash());
+app.use((req,res,next)=>{
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+})
 
 // ------------------ Home page route
 app.get('/', catchAsync(async (req, res) => {
