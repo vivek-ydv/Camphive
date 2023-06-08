@@ -7,10 +7,15 @@ const flash = require('connect-flash');
 const ExpressError = require('./utils/ExpressError');
 const catchAsync = require('./utils/catchAsync');
 const methodOverride = require('method-override');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
+
 
 // Importing routes
-const campgrounds = require('./routes/campgrounds');
-const reviews = require('./routes/reviews');
+const userRoutes = require('./routes/user')
+const campgroundRoutes = require('./routes/campgrounds');
+const reviewRoutes = require('./routes/reviews');
 
 // Connecting to MongoDB
 connectToMongo();
@@ -45,7 +50,19 @@ app.use(session(sessionConfig));
 
 // Configuring flash
 app.use(flash());
-app.use((req,res,next)=>{
+
+// Configuring passport tool - user authentication
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use((req, res, next) => {
+    if (!['/login', '/'].includes(req.originalUrl)) {
+        req.session.returnTo = req.originalUrl
+    }
+    res.locals.currentUser = req.user; // From passport authentication tool
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
@@ -56,11 +73,14 @@ app.get('/', catchAsync(async (req, res) => {
     res.render('home');
 }));
 
+// ------------------ User Auth routes
+app.use('/', userRoutes);
+
 // ------------------ Campground routes
-app.use('/campgrounds', campgrounds);
+app.use('/campgrounds', campgroundRoutes);
 
 // ------------------ Review routes
-app.use('/campgrounds/:id/reviews', reviews);
+app.use('/campgrounds/:id/reviews', reviewRoutes);
 
 // ------------------ Handling all non-existing routes & errors
 app.all('*', (req, res, next) => {

@@ -1,0 +1,65 @@
+main {
+  font-family: "Poppins", sans-serif;
+}
+
+.main-content {
+  max-width: 400px;
+  width: 100%;
+  padding: 2rem;
+  margin-top: 3rem;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.logo a {
+  text-decoration: none;
+  color: #e85d04;
+}
+
+.signin-name {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+/* Form styles */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-dark {
+  padding: 0.5rem 2rem;
+  font-size: 1rem;
+  background-color: #343a40;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-dark:hover {
+  background-color: #23272b;
+}

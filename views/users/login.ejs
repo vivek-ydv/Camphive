@@ -1,0 +1,30 @@
+<% layout('/layouts/boilerplatewithoutFooter') %>
+    <main>
+        <div class="main-content container">
+            <div class="logo">
+                <a class="navbar-link" href="/campgrounds"><i class="fas fa-campground" style="color: #e85d04;"></i>
+                    Camphive</a>
+            </div>
+            <div class="signin-name">
+                <h2>Log In</h2>
+            </div>
+            <form action="/login" method="POST" class="validated-form" novalidate>
+                <div class="form-group">
+                    <label class="form-label" for="username">Username</label>
+                    <input class="form-control" type="text" name="username" id="username" placeholder="Username"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input class="form-control" type="password" name="password" id="password" placeholder="Password"
+                        required>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-dark" type="submit">Log In</button>
+                </div>
+                <div class="sign-up mt-2">
+                    <p>Don't have an account? <a href="/register">Register here</a></p>
+                </div>
+            </form>
+        </div>
+    </main>
