@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-5 mb-3 mt-3 ">
             <% if(currentUser) { %>
                 <h2>Leave a Review</h2>
                 <form action="/campgrounds/<%= campground._id %>/reviews" method="POST" class="validated-form mb-3"
@@ -72,9 +72,10 @@
                 </form>
             <% } %>
 
-            <div class="mb-3">
+            <div class="mb-3 scrollable-container">
+      
                 <% for(let review of campground.reviews) { %>
-                    <div class="card review-card mb-3">
+                    <div class="card review-card mt-2 mb-3 ms-1 me-1">
                         <div class="delete-container">
                             <form action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE"
                                 method="POST">
@@ -86,7 +87,7 @@
                             </form>
                         </div>
                         <div class="card-body">
-                            <h5 class="text-muted mt-2">
+                            <h5 class="text-muted">
                                 <%= review.author.username %>
                             </h5>
                             <div class="starability-result" data-rating="<%= review.rating %>">
@@ -104,6 +105,31 @@
 </div>
 
 <style>
+    .scrollable-container {
+        height: 500px;
+        overflow-y: hidden;
+        transition: overflow-y 0.3s ease-in-out;
+    }
+
+    .scrollable-container:hover {
+        border: 2px solid #bdb2b273;
+        border-radius: 10px;
+        overflow-y: scroll;
+    }
+
+    /* Hide the scrollbar */
+    .scrollable-container::-webkit-scrollbar {
+        width: 0.6em;
+        background-color: #ffffff00;
+    }
+
+    .scrollable-container::-webkit-scrollbar-thumb {
+        background-color: #bdb2b273;
+        border-radius: 10px;
+        
+    }
+
+        
     .card {
         border-radius: 10px;
         overflow: hidden;
