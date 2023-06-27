@@ -3,6 +3,8 @@ const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const Campground = require('../models/campground');
 const { isLoggedIn, validateCampground, isAuthor } = require('../middlware');
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 //-------------------Get all campgrounds
 router.get('/', catchAsync(async (req, res) => {
@@ -12,16 +14,19 @@ router.get('/', catchAsync(async (req, res) => {
 
 //-------------------Create a new campground
 router.get('/new', isLoggedIn, (req, res) => {
-
     res.render('campgrounds/new');
 })
 
-router.post('/', isLoggedIn, validateCampground, catchAsync(async (req, res, next) => {
-    const campground = new Campground(req.body.campground);
-    campground.author = req.user._id; // id of current logged in user 
-    await campground.save();
-    req.flash('success', 'Sucessfully made a new campground');
-    res.redirect(`/campgrounds/${campground._id}`)
+// router.post('/', isLoggedIn, validateCampground, catchAsync(async (req, res, next) => {
+//     const campground = new Campground(req.body.campground);
+//     campground.author = req.user._id; // id of current logged in user 
+//     await campground.save();
+//     req.flash('success', 'Sucessfully made a new campground');
+//     res.redirect(`/campgrounds/${campground._id}`)
+// }))
+
+router.post('/', isLoggedIn,upload.array('image'), catchAsync(async (req, res, next) => {
+    res.send(req.body,req.files);
 }))
 
 //-------------------Get info about a single campground

@@ -28,9 +28,9 @@
                                 <button type="submit" class="btn btn-danger"
                                     onclick="return confirm('Are you sure you want to delete this campground?')">Delete</button>
                             </form>
+                            <a href="/campgrounds" class="btn btn-secondary">Back to All Campgrounds</a>
                         </div>
                     <% } %>
-                    <a href="/campgrounds" class="btn btn-secondary">Back to All Campgrounds</a>
                 </div>
                 <div class="card-footer text-muted">
                     Submitted by <%= campground.author.username %>
