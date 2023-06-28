@@ -6,7 +6,7 @@ const { isLoggedIn, validateCampground, isAuthor } = require('../middlware');
 
 // Multer is used to store / handle the file data(i.e. to handle multipart/form-data in html) : npm i multer
 const multer = require('multer');
-const { storage } = require('../cloudinary/index')
+const {cloudinary, storage } = require('../cloudinary/index')
 const upload = multer({ storage })  //where to save to image
 
 //-------------------Get all campgrounds
@@ -57,6 +57,13 @@ router.put('/:id', isLoggedIn, isAuthor, upload.array('image'), validateCampgrou
     const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
     campground.images.push(...imgs);
     await campground.save();
+
+    if (req.body.deleteImages) {
+        for (let filename of req.body.deleteImages) {
+            await cloudinary.uploader.destroy(filename)
+        }
+        await campground.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
+    }
     req.flash('success', 'Sucessfully edited the campground');
     res.redirect(`/campgrounds/${campground._id}`)
 }))
