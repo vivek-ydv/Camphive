@@ -53,11 +53,11 @@
                     </p>
                     <% if (currentUser && campground.author.equals(currentUser._id)) { %>
                         <div class="mb-1">
-                            <a href="/campgrounds/<%= campground._id %>/edit" class="btn btn-primary">Edit</a>
+                            <a href="/campgrounds/<%= campground._id %>/edit" class="btn btn-primary mt-2">Edit</a>
                             <form action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST" style="display: inline;">
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this campground?')">Delete</button>
+                                <button type="submit" class="btn btn-danger mt-2" onclick="return confirm('Are you sure you want to delete this campground?')">Delete</button>
                             </form>
-                            <a href="/campgrounds" class="btn btn-secondary">Back to All Campgrounds</a>
+                            <a href="/campgrounds" class="btn btn-secondary mt-2">Back to All Campgrounds</a>
                         </div>
                     <% } else { %>
                         <a href="/campgrounds" class="btn btn-secondary">Back to All Campgrounds</a>
