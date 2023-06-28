@@ -3,8 +3,11 @@ const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const Campground = require('../models/campground');
 const { isLoggedIn, validateCampground, isAuthor } = require('../middlware');
-const multer = require('multer')
-const upload = multer({ dest: 'uploads/' })
+
+// Multer is used to store / handle the file data(i.e. to handle multipart/form-data in html) : npm i multer
+const multer = require('multer');
+const { storage } = require('../cloudinary/index')
+const upload = multer({ storage })  //where to save to image
 
 //-------------------Get all campgrounds
 router.get('/', catchAsync(async (req, res) => {
@@ -17,16 +20,13 @@ router.get('/new', isLoggedIn, (req, res) => {
     res.render('campgrounds/new');
 })
 
-// router.post('/', isLoggedIn, validateCampground, catchAsync(async (req, res, next) => {
-//     const campground = new Campground(req.body.campground);
-//     campground.author = req.user._id; // id of current logged in user 
-//     await campground.save();
-//     req.flash('success', 'Sucessfully made a new campground');
-//     res.redirect(`/campgrounds/${campground._id}`)
-// }))
-
-router.post('/', isLoggedIn,upload.array('image'), catchAsync(async (req, res, next) => {
-    res.send(req.body,req.files);
+router.post('/', isLoggedIn, upload.array('image'), validateCampground, catchAsync(async (req, res, next) => {
+    const campground = new Campground(req.body.campground);
+    campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }))
+    campground.author = req.user._id; // id of current logged in user 
+    await campground.save();
+    req.flash('success', 'Sucessfully made a new campground');
+    res.redirect(`/campgrounds/${campground._id}`)
 }))
 
 //-------------------Get info about a single campground
@@ -51,9 +51,12 @@ router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(async (req, res, next) 
     res.render('campgrounds/edit', { campground });
 }))
 
-router.put('/:id', isLoggedIn, isAuthor, validateCampground, catchAsync(async (req, res, next) => {
+router.put('/:id', isLoggedIn, isAuthor, upload.array('image'), validateCampground, catchAsync(async (req, res, next) => {
     const { id } = req.params;
     const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
+    const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
+    campground.images.push(...imgs);
+    await campground.save();
     req.flash('success', 'Sucessfully edited the campground');
     res.redirect(`/campgrounds/${campground._id}`)
 }))
