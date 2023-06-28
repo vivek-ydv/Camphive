@@ -3,11 +3,14 @@ const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const Campground = require('../models/campground');
 const { isLoggedIn, validateCampground, isAuthor } = require('../middlware');
-
 // Multer is used to store / handle the file data(i.e. to handle multipart/form-data in html) : npm i multer
 const multer = require('multer');
 const {cloudinary, storage } = require('../cloudinary/index')
 const upload = multer({ storage })  //where to save to image
+// Map box GeoCoding
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding')
+const mapBoxtoken = process.env.MAPBOX_TOKEN
+const geocoder = mbxGeocoding({ accessToken: mapBoxtoken })
 
 //-------------------Get all campgrounds
 router.get('/', catchAsync(async (req, res) => {
@@ -21,8 +24,13 @@ router.get('/new', isLoggedIn, (req, res) => {
 })
 
 router.post('/', isLoggedIn, upload.array('image'), validateCampground, catchAsync(async (req, res, next) => {
+    const geodata = await geocoder.forwardGeocode({
+        query: req.body.campground.location,
+        limit: 1
+    }).send()
     const campground = new Campground(req.body.campground);
-    campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }))
+    campground.geometry = geodata.body.features[0].geometry;
+    campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
     campground.author = req.user._id; // id of current logged in user 
     await campground.save();
     req.flash('success', 'Sucessfully made a new campground');
