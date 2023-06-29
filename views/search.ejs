@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate.ejs') %>
 
 
-    <h1 class="card-title mt-3 mb-4">Search Results For : <%= search_query %></h1>
+    <h1 class="search-title mt-3 mb-4">Search Results For : <%= search_query %></h1>
 
     <form action="/results/?" class="d-flex mb-5">
         <input class="form-control me-2" type="search" placeholder="Search Your Campgrounds ...." name="search_query" aria-label="Search" value="<%= search_query %>">
@@ -93,6 +93,13 @@
         .card-text {
             flex: 1;
             margin-bottom: 15px;
+        }
+
+        .search-title {
+            font-size: 35px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
         }
 
         /* Media query for responsive behavior */
