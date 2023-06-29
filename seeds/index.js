@@ -56,9 +56,9 @@ const images = [
 
 const seedDB = async () => {
     await Campground.deleteMany({});
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 200; i++) {
         const random400 = Math.floor(Math.random() * 400);
-        const random8 = Math.floor(Math.random() * 8);
+        const random8 = Math.floor(Math.random() * 7);
         const price = Math.floor(Math.random() * 20) + 10;
         const location = `${cities[random400].city}, ${cities[random400].admin_name}`
         const geodata = await geocoder.forwardGeocode({
