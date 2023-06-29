@@ -14,7 +14,7 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
-
+const Campground = require('./models/campground');
 
 // Importing routes
 const userRoutes = require('./routes/user')
@@ -85,6 +85,13 @@ app.use('/campgrounds', campgroundRoutes);
 
 // ------------------ Review routes
 app.use('/campgrounds/:id/reviews', reviewRoutes);
+
+// ------------------ Search query route
+app.get('/results', async(req, res) =>{
+    const {search_query} = req.query
+    const campgrounds = await Campground.find( {title: {$regex: search_query, $options: "i"} })
+    res.render('search.ejs', {campgrounds, search_query})
+})
 
 // ------------------ Handling all non-existing routes & errors
 app.all('*', (req, res, next) => {

@@ -45,7 +45,7 @@ const images = [
         filename: 'YelpCamp/qmmxwz5prukysbohozaz',
     },
     {
-        url: 'https://res.cloudinary.com/dayiolmuz/image/upload/v1687897480/Camphive/nc1jzjpvpyhwhuoybpjn.jpg',
+        url: 'https://res.cloudinary.com/dhbiouaym/image/upload/v1632636471/YelpCamp/kan7ktxqgynjudblesv8.jpg',
         filename: 'YelpCamp/y5xf7zdzgn5vi444qpsx',
     },
     {
