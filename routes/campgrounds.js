@@ -7,7 +7,7 @@ const { isLoggedIn, validateCampground, isAuthor } = require('../middlware');
 const multer = require('multer');
 const {cloudinary, storage } = require('../cloudinary/index')
 const upload = multer({ storage })  //where to save to image
-// Map box GeoCoding
+// Mapbox GeoCoding
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding')
 const mapBoxtoken = process.env.MAPBOX_TOKEN
 const geocoder = mbxGeocoding({ accessToken: mapBoxtoken })
