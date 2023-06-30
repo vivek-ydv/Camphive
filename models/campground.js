@@ -7,7 +7,8 @@ const ImageSchema = Schema({
     filename: String,
 })
 
-const opts = {toJSON: {virtuals: true}}
+const opts = {toJSON: {virtuals: true}};
+
 ImageSchema.virtual('thumbnail').get(function () {
     return this.url.replace('/upload', ('/upload/w_125'))
 })

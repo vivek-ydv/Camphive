@@ -16,6 +16,7 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const Campground = require('./models/campground');
 
+const { isLoggedIn } = require('./middlware');
 // Importing routes
 const userRoutes = require('./routes/user')
 const campgroundRoutes = require('./routes/campgrounds');
@@ -87,11 +88,20 @@ app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds/:id/reviews', reviewRoutes);
 
 // ------------------ Search query route
-app.get('/results', async(req, res) =>{
-    const {search_query} = req.query
-    const campgrounds = await Campground.find( {title: {$regex: search_query, $options: "i"} })
-    res.render('search.ejs', {campgrounds, search_query})
+app.get('/results', async (req, res) => {
+    const { search_query } = req.query
+    const campgrounds = await Campground.find({ title: { $regex: search_query, $options: "i" } })
+    res.render('search.ejs', { campgrounds, search_query })
 })
+
+// ------------------ User Profile route
+app.get('/profile/:uname', isLoggedIn, async (req, res) => {
+    // Find the user's campgrounds using the author field and populate the reviews
+    const campgrounds = await Campground.find({ author: req.user._id });
+    const user = req.user;
+    res.render('profile.ejs', {campgrounds,user});
+});
+
 
 // ------------------ Handling all non-existing routes & errors
 app.all('*', (req, res, next) => {

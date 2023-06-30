@@ -2,7 +2,7 @@
     .dropdown-menu {
         border-radius: 0.5rem;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        animation: fadeInDown 0.5s;
+        animation: fadeInDown 0.3s;
     }
 
     @keyframes fadeInDown {
@@ -66,9 +66,8 @@
                         Hi, <%= currentUser.username %> <i class="fas fa-user ms-1"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="/profile">Your Profile</a></li>
-                        <li><a class="dropdown-item" href="/settings">Settings</a></li> 
-                        <li><a class="dropdown-item" href="/orders">Orders</a></li> 
+                        <li><a class="dropdown-item" href="/profile/<%= currentUser.username %>">Your Profile</a></li>
+                        <li><a class="dropdown-item" href="/profile/<%= currentUser.username %>">Campgrounds</a></li> 
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
                     </ul>

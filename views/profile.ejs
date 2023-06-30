@@ -1,0 +1,215 @@
+<% layout('layouts/boilerplate.ejs') %>
+
+    <div class="main-body">
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card ">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                                class="rounded-circle" width="150">
+                            <div class="mt-3">
+                                <h4>
+                                    <%= user.username %>
+                                </h4>
+                                <p class="text-secondary mb-1">Professional Camper</p>
+                                <div class="d-flex flex-wrap justify-content-between rounded-3 p-2 mb-2"
+                                    style="background-color: #fbf8f8e6;">
+                                    <div class="flex-grow-1">
+                                        <p class="small text-muted mb-1 mx-1">Campgrounds</p>
+                                        <p class="mb-0">
+                                            <%= campgrounds.length %>
+                                        </p>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <p class="small text-muted mb-1">Followers</p>
+                                        <p class="mb-0">976</p>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <p class="small text-muted mb-1 mx-1">Rating</p>
+                                        <p class="mb-0">8.5</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex pt-1">
+                                    <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
+                                    <button type="button" class="btn btn-primary flex-grow-1">Follow</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <ul class="list-group list-group-flush card-info" style="background-color: #ffffff;">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <path
+                                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                    </path>
+                                </svg> Website
+                            </h6>
+                            <span class="text-secondar">https://<%= user.username.toLowerCase() %>.com</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-envelope mr-2 icon-inline">
+                                    <path
+                                        d="M21 12.79V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v7.79l8 4.9 8-4.9zM19 8l-7 4.33L5 8m0 11h14">
+                                    </path>
+                                </svg> Email
+                            </h6>
+                            <span class="text-secondary">
+                                <%= user.email %>
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-reddit mr-2 icon-inline">
+                                    <!-- Replace the path below with the actual path for the Reddit icon -->
+                                    <path
+                                        d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.48 6.6c.18.04.35.1.52.18.3-.32.7-.52 1.15-.52.45 0 .86.2 1.15.52.17-.08.34-.14.52-.18-.04-.18-.1-.35-.18-.52-.32-.3-.52-.7-.52-1.15 0-.45.2-.86.52-1.15-.08-.17-.14-.34-.18-.52-.18.04-.35.1-.52.18-.3.32-.7.52-1.15.52-.45 0-.86-.2-1.15-.52-.17.08-.34.14-.52.18.04.18.1.35.18.52.32.3.52.7.52 1.15 0 .45-.2.86-.52 1.15.08.17.14.34.18.52zm-.22 1.63c-1.16 0-2.1.94-2.1 2.1 0 1.16.94 2.1 2.1 2.1 1.16 0 2.1-.94 2.1-2.1 0-1.16-.94-2.1-2.1-2.1z">
+                                    </path>
+                                </svg> Reddit
+                            </h6>
+                            <span class="text-secondary">u/<%= user.username.toLowerCase() %></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-twitter mr-2 icon-inline text-info">
+                                    <path
+                                        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                                    </path>
+                                </svg> Twitter
+                            </h6>
+                            <span class="text-secondary">@<%= user.username.toLowerCase() %></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="feather feather-instagram mr-2 icon-inline text-danger">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg> Instagram
+                            </h6>
+                            <span class="text-secondary">@<%= user.username.toLowerCase() %></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="feather feather-facebook mr-2 icon-inline text-primary">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z">
+                                    </path>
+                                </svg> Facebook
+                            </h6>
+                            <span class="text-secondary">@<%= user.username.toLowerCase() %></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mb-3 col-md-8 scrollable-container">
+                <div class="row">
+                    <% for (let campground of campgrounds) { %>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="card card-image mb-2">
+                                <img src="<%= campground.images.length ? campground.images[0].thumbnail : '/img/home.jpg' %>"
+                                    class="card-img-top" alt="Campground Image">
+                                <div class="card-body">
+                                    <a href="/campgrounds/<%= campground._id %>" class="text-dark">
+                                        <%= campground.title.substring(0, 12) + (campground.title.length> 13 ? '...'
+                                            : '') %>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            body {
+                color: #1a202c;
+                background-color: #e2e8f0;
+            }
+
+            .main-body {
+                padding: 15px;
+            }
+
+            .card-info {
+                border-radius: 10px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            .card-image {
+                border-radius: 5px;
+                /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); */
+                transition: transform 0.2s, box-shadow 0.3s;
+                margin-left: -7px;
+                margin-right: -7px;
+            }
+
+            .card-img-top {
+                height: 150px;
+                object-fit: cover;
+            }
+
+            .card-image:hover {
+                transform: scale(1.05);
+                box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+            }
+
+            .avatar-img {
+                border-radius: 50%;
+                margin-bottom: 15px;
+            }
+
+            .text-dark {
+                font-size: large;
+            }
+
+            .scrollable-container {
+                height: fit-content;
+                max-height: 650px;
+                overflow-y: hidden;
+                overflow-x: auto;
+                transition: overflow-y 0.3s ease-in-out;
+                border: none;
+                border-radius: 10px;
+            }
+
+            .scrollable-container:hover {
+                border: 2px solid #bdb2b239;
+                border-radius: 10px;
+                overflow-y: scroll;
+            }
+
+            /* Hide the scrollbar */
+            .scrollable-container::-webkit-scrollbar {
+                width: 0.5em;
+                background-color: #ffffff30;
+            }
+
+            .scrollable-container::-webkit-scrollbar-thumb {
+                background-color: #bdb2b273;
+                border-radius: 10px;
+
+            }
+        </style>
