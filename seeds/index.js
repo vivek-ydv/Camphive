@@ -54,11 +54,13 @@ const images = [
     },
 ]
 
+const author = ['648042f83174b1e1a83df3e9','648167f6919df6fa322825e0','649e7a1242ea1688f862a314','649e7c5b42ea1688f862a7eb'];
 const seedDB = async () => {
     await Campground.deleteMany({});
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 100; i++) {
         const random400 = Math.floor(Math.random() * 400);
         const random8 = Math.floor(Math.random() * 7);
+        const random4 = Math.floor(Math.random() * 4);
         const price = Math.floor(Math.random() * 20) + 10;
         const location = `${cities[random400].city}, ${cities[random400].admin_name}`
         const geodata = await geocoder.forwardGeocode({
@@ -67,7 +69,7 @@ const seedDB = async () => {
         }).send()
 
         const camp = new Campground({
-            author: '648042f83174b1e1a83df3e9',
+            author: author[random4],
             location: location,
             geometry: geodata.body.features[0].geometry,
             title: `${sample(descriptors)} ${sample(places)}`,
