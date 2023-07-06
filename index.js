@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Configuring session
 const sessionConfig = {
-    secret: "$ecret",
+    secret: process.env.SECRET || "$ecret",
     resave: false,
     saveUninitialized: true,
     cookie: {
