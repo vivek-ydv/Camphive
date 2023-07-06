@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoURI = "mongodb://127.0.0.1:27017/camphiveApp";
+const mongoURI = process.env.mongoURI;
 
 const connectToMongo = () => {
     mongoose.set('strictQuery', false);
