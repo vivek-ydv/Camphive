@@ -99,6 +99,10 @@ app.get('/profile/:uname', isLoggedIn, async (req, res) => {
     res.render('profile.ejs', { campgrounds, user });
 });
 
+// ------------------ About route
+app.get('/about', async (req, res) => {
+    res.render('about.ejs');
+})
 
 // ------------------ Handling all non-existing routes & errors
 app.all('*', (req, res, next) => {
