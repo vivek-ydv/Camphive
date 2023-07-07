@@ -111,10 +111,8 @@ app.use((err, req, res, next) => {
 });
 
 // Starting the server
-if (process.env.API_PORT) {
-    app.listen(process.env.API_PORT, () => {
-        console.log(`Listening on port http://localhost:${process.env.API_PORT}`);
-    });
-}
+app.listen(process.env.API_PORT, () => {
+    console.log(`Listening on port http://localhost:3000`);
+});
 
 module.exports = app;
