@@ -5,22 +5,22 @@ if (process.env.NODE_ENV !== "production") {
 const express = require('express');
 const path = require('path');
 const ejsMate = require('ejs-mate');
-const connectToMongo = require('../db');
+const connectToMongo = require('./db');
 const session = require('express-session');
 const flash = require('connect-flash');
-const ExpressError = require('../utils/ExpressError');
-const catchAsync = require('../utils/catchAsync');
+const ExpressError = require('./utils/ExpressError');
+const catchAsync = require('./utils/catchAsync');
 const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const User = require('../models/user');
-const Campground = require('../models/campground');
+const User = require('./models/user');
+const Campground = require('./models/campground');
 
-const { isLoggedIn } = require('../middlware');
+const { isLoggedIn } = require('./middlware');
 // Importing routes
-const userRoutes = require('../routes/user')
-const campgroundRoutes = require('../routes/campgrounds');
-const reviewRoutes = require('../routes/reviews');
+const userRoutes = require('./routes/user')
+const campgroundRoutes = require('./routes/campgrounds');
+const reviewRoutes = require('./routes/reviews');
 
 // Connecting to MongoDB
 connectToMongo();
