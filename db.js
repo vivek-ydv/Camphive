@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoURI = process.env.mongoURI;
+const mongoURI = 'mongodb+srv://vivekydv:vivekCluster0@cluster0.csr861r.mongodb.net/campHive?retryWrites=true&w=majority';
 
 const connectToMongo = () => {
     mongoose.set('strictQuery', false);
