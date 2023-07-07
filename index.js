@@ -96,7 +96,7 @@ app.get('/profile/:uname', isLoggedIn, async (req, res) => {
     // Find the user's campgrounds using the author field and populate the reviews
     const campgrounds = await Campground.find({ author: req.user._id });
     const user = req.user;
-    res.render('profile.ejs', {campgrounds,user});
+    res.render('profile.ejs', { campgrounds, user });
 });
 
 
@@ -111,8 +111,9 @@ app.use((err, req, res, next) => {
 });
 
 // Starting the server
-app.listen(3000, () => {
-    console.log('Listening on port 3000');
-});
-
+if (process.env.API_PORT) {
+    app.listen(3000, () => {
+        console.log('Listening on port 3000');
+    });
+}
 module.exports = app;
