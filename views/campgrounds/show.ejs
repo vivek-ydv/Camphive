@@ -4,7 +4,7 @@
 
 <div class="container mt-4">
     <div class="row mb-3">
-        <div class="col-md-7">
+        <div class="col-md-7 mb-2">
             <div class="card">
                 <!-- <img src="<%= campground.image %>" class="card-img-top" alt="Campground Image"> -->
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -149,6 +149,11 @@
 <script src="/js/showPageMaps.js"></script>
 
 <style>
+
+    #map {
+        border-radius: 10px;
+    }
+    
     .scrollable-container {
         height: fit-content;
         max-height: 450px;
@@ -239,5 +244,7 @@
     .review-card:hover {
         transform: translateY(-2px);
     }
+
+
 
 </style>
