@@ -1,8 +1,7 @@
 <style>
     .dropdown-menu {
-        border-radius: 0.5rem;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        animation: fadeInDown 0.3s;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.103);
+        animation: fadeInDown 0.25s;
     }
 
     @keyframes fadeInDown {
@@ -10,6 +9,7 @@
             opacity: 0;
             transform: translate3d(0, -20%, 0);
         }
+
         to {
             opacity: 1;
             transform: none;
@@ -39,6 +39,52 @@
     .dropdown-toggle::after {
         display: none;
     }
+
+    /* Custom styles */
+    .nav-link {
+        color: #fff;
+    }
+
+    .nav-link:hover {
+        color: #007bff;
+    }
+
+    .dropdown-toggle {
+        color: #fff;
+        background-color: transparent;
+        border: none;
+    }
+
+    .dropdown-toggle:hover {
+        color: #007bff;
+    }
+
+    .dropdown-menu {
+        border: none;
+        border-radius: 0;
+        background-color: #fff;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .dropdown-item {
+        color: #333;
+    }
+
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+        color: #fff;
+        background-color: #007bff;
+    }
+
+    .user-icon {
+        color: #fff;
+        font-size: 1.2rem;
+        margin-left: 0.5rem;
+    }
+
+    .user-icon:hover {
+        color: #007bff;
+    }
 </style>
 
 <!-- Nav Bar -->
@@ -58,21 +104,26 @@
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="/about">About</a>
                 <% if(!currentUser) { %>
-                <a class="nav-link" href="/login">Sign In</a>
-                <a class="nav-link active btn btn-primary" href="/register">Join Free</a>
-                <% } else { %>
-                <div class="dropdown">
-                    <a href="#" class="nav-link active dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Hi, <%= currentUser.username %> <i class="fas fa-user ms-1"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="/profile/<%= currentUser.username %>">Your Profile</a></li>
-                        <li><a class="dropdown-item" href="/profile/<%= currentUser.username %>">Campgrounds</a></li> 
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                    </ul>
-                </div>
-                <% } %>
+                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/register">Register</a>
+                    <% } else { %>
+                        <div class="dropdown">
+                            <a href="#" class="nav-link active dropdown-toggle" id="userDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Hi, <%= currentUser.username %> <i class="fas fa-user user-icon"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="/profile/<%= currentUser.username %>">Your
+                                        Profile</a></li>
+                                <li><a class="dropdown-item" href="/profile/<%= currentUser.username %>">Campgrounds</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            </ul>
+                        </div>
+                        <% } %>
             </div>
         </div>
     </div>

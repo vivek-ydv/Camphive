@@ -37,13 +37,12 @@
                 <h3 class="float-md-start mb-0">Camphive</h3>
                 <nav class="nav nav-masthead justify-content-center float-md-end">
                     <a href="" class="nav-link active" aria-current="page">Home</a>
-                    <a href="/campgrounds" class="nav-link">Campgrounds</a>
                     <a href="/about" class="nav-link">About</a>
                     <% if (!currentUser) { %>
+                        <a href="/login" class="nav-link">Login</a>
                         <a href="/register" class="nav-link">Register</a>
-                        <a href="/login" class="nav-link">login</a>
                         <% } else {%>
-                            <a href="/logout" class="nav-link">logout</a>
+                            <a href="/logout" class="nav-link">Logout</a>
                             <% } %>
                 </nav>
             </div>
