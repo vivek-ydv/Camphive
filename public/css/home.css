@@ -48,7 +48,7 @@ p {
 @media (max-width: 1000px) {
     body {
         background-image: linear-gradient(rgba(0, 0, 0, 0.184), rgba(0, 0, 0, 0.688)),
-            url("../img/home-mobile.jpg");
+            url("../img/home.jpg");
         background-size: cover;
         background-position: center;
     }
