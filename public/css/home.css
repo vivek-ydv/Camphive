@@ -48,7 +48,7 @@ p {
 @media (max-width: 1000px) {
     body {
         background-image: linear-gradient(rgba(0, 0, 0, 0.184), rgba(0, 0, 0, 0.688)),
-            url("../img/home.jpg");
+            url("../img/home-mobile.jpg");
         background-size: cover;
         background-position: center;
     }
@@ -58,11 +58,11 @@ p {
     }
 
     h1 {
-        font-size: 2rem;
+        font-size: 40px;
         font-weight: 900;
     }
 
     p {
-        font-size: 1.1rem;
+        font-size: 20px;
     }
 }
