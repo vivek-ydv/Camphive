@@ -18,9 +18,10 @@ h1 {
     font-weight: 900;
 }
 
-p{
+p {
     font-size: 1.4rem;
 }
+
 .nav-link {
     padding: 0.25rem 0;
     color: rgba(255, 255, 255, 0.5);
@@ -48,6 +49,8 @@ p{
     body {
         background-image: linear-gradient(rgba(0, 0, 0, 0.184), rgba(0, 0, 0, 0.688)),
             url("../img/home-mobile.jpg");
+        background-size: cover;
+        background-position: center;
     }
 
     .cover-container {
@@ -55,11 +58,11 @@ p{
     }
 
     h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
         font-weight: 900;
     }
-    
-    p{
-        font-size: 1.2rem;
+
+    p {
+        font-size: 1.1rem;
     }
 }
