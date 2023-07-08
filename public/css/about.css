@@ -81,9 +81,9 @@ body {
 /* .info:hover{
   transform: scale(1.1);
 } */
-.info h1 {
+.info h2 {
   font-family: "Lilita One", cursive;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: lighter;
   margin-bottom: 0rem;
 }
